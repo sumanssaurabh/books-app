@@ -1,4 +1,5 @@
-{% extends 'books/base.html' %} {% block body %}
+{% extends 'books/base.html' %} 
+{% block body %}
 <a href="{% url 'books:crud' %}">App</a>
 <a href="{% url 'books:create' %}">Create</a>
 <a href="{% url 'books:read' %}">Read</a>
@@ -21,5 +22,6 @@
 </table>
 
 {% else %}
-<p>No books available.</p>
-{% endif %} {% endblock body %}
+    <p>No books available.</p>
+{% endif %} 
+{% endblock body %}
