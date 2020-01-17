@@ -1,26 +1,25 @@
-{% extends 'books/base.html' %}
-{% block body %}
-<a href="{% url 'books:crud' %}">CRUD</a>
+{% extends 'books/base.html' %} {% block body %}
+<a href="{% url 'books:crud' %}">App</a>
 <a href="{% url 'books:create' %}">Create</a>
 <a href="{% url 'books:read' %}">Read</a>
 <a href="{% url 'books:update' %}">Update</a>
 <a href="{% url 'books:delete' %}">Delete</a>
-    {% if books %}
-        <table class="table table-hover table-responsive">
-            <tr>
-                <th>Book Name</th>
-                <th>Book Pages</th>
-                <th>Book Price</th>
-            </tr>
-            {% for book in books %}
-                <tr>
-                    <td>{{book.bookName}}</td>
-                    <td>{{book.bookPages}}</td>
-                    <td>{{book.bookPrice}}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% else %}
-        <p>No books available.</p>
-    {% endif %}
-{% endblock body %}
+{% if books %}
+<table class="table table-hover table-responsive">
+  <tr>
+    <th>Book Name</th>
+    <th>Book Pages</th>
+    <th>Book Price</th>
+  </tr>
+  {% for book in books %}
+  <tr>
+    <td>{{book.bookName}}</td>
+    <td>{{book.bookPages}}</td>
+    <td>{{book.bookPrice}}</td>
+  </tr>
+  {% endfor %}
+</table>
+
+{% else %}
+<p>No books available.</p>
+{% endif %} {% endblock body %}
