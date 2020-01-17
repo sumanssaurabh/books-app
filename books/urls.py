@@ -11,7 +11,7 @@ urlpatterns = [
     path("update/", update, name="update"),
     path("delete/", delete, name="delete"),
     path("edit/<int:book_id>", edit, name="crud"),
-    path("crud/", crud, name="crud"),
+    path("app/", crud, name="crud"),
     path("test/", test, name="test"),
     path("cheat/", cheat, name="cheat"),
 ]
