@@ -1,0 +1,87 @@
+{% extends 'books/base.html' %}
+{% block body %}
+<a href="{% url 'books:crud' %}">CRUD</a>
+<a href="{% url 'books:create' %}">Create</a>
+<a href="{% url 'books:read' %}">Read</a>
+<a href="{% url 'books:update' %}">Update</a>
+<a href="{% url 'books:delete' %}">Delete</a>
+    <table class="table table-hover table-responsive">
+        <tr>
+            <th>Book Name</th>
+            <th>Book Pages</th>
+            <th>Book Price</th>
+            <th>Action</th>
+        </tr >
+            {% for book in books %}
+             <tr id={{book.id}}>
+                <form action="" method="post">
+                {% csrf_token %}
+                <td class="bookName">{{book.bookName}}</td>
+                <td class="bookPages">{{book.bookPages}}</td>
+                <td class="bookPrice">{{book.bookPrice}}</td>
+                <td>
+                    <input type="hidden" name="id" value={{book.id}}>
+                    <button type="button" class="edit btn btn-primary" data-toggle="modal" 
+                    data-target="#bookmodal" data-whatever={{book.id}} value="{{book.id}}">Edit</button>
+                    </form>
+                </td>
+                
+            </tr> 
+    {% endfor %}
+    </table>
+<!-- Modal -->
+<div class="modal fade" id="bookmodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" 
+aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <!-- modal body -->
+      <div class="modal-body">
+        body
+      </div>
+      <!-- end of modal body -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- end modal-->
+
+{% endblock body %}
+{% block javascript %}
+        <script>
+            $(document).ready(function(){
+                //code test.html
+                $(".edit").click(function(){
+                    var btn = $(this);
+                    var id = $(this).attr("value");
+                    console.log(id);
+                    //bookName
+                    
+
+                });
+                $('#bookmodal').on('show.bs.modal', function (event) {
+                    var button = $(event.relatedTarget) // Button that triggered the modal
+                    var id = button.data('whatever') // Extract info from data-* attributes
+                    console.log("whatever"+id);
+                    var modal = $(this);
+                    var url = "/edit/"+id;
+                    $.get(
+                        url,
+                        function(resp){
+                            // resp
+                            modal.find('.modal-body').html(resp);
+                            console.log(resp);
+                        });
+                    });
+            });
+        </script>
+    {% endblock javascript %}

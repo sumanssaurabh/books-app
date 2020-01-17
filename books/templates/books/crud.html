@@ -1,0 +1,52 @@
+{% extends 'books/base.html' %}
+{% block title %}CRUD
+{% endblock title %}
+{% block body %}
+<a href="{% url 'books:crud' %}">CRUD</a>
+<a href="{% url 'books:create' %}">Create</a>
+<a href="{% url 'books:read' %}">Read</a>
+<a href="{% url 'books:update' %}">Update</a>
+<a href="{% url 'books:delete' %}">Delete</a>
+    <table class="table table-hover table-responsive">
+        <tr>
+            <th>Book Name</th>
+            <th>Book Pages</th>
+            <th>Book Price</th>
+            <th>Action</th>
+        </tr>
+        <tr>
+        <form action="" method="post">
+            {% csrf_token %}
+            <td>{{form.bookName}}</td>
+            <td>{{form.bookPages}}</td>
+            <td>{{form.bookPrice}}</td>
+            <td>
+                 <button type="submit" name="action" value="add">Add</button>
+            </td>
+           
+        </form>
+        </tr>
+        {% comment %} 
+        create form
+         {% endcomment %}
+            {% for data in forms %}
+                <tr>
+                    <td>
+                        <form action="" method="post">
+                        {% csrf_token %}
+                        {{data.bookName}}
+                    </td>
+                    <td>{{data.bookPages}}</td>
+                    <td>{{data.bookPrice}}</td>
+                    <td>
+                        <input type="hidden" name="id" value={{data.initial.id}}>
+                        <button type="submit" name="action" value="save">Save</button>
+                    </td>
+                    <td>
+                        <button type="submit" name="action" value="delete">Delete</button>
+                    </td>
+                    </form>
+                </tr> 
+            {% endfor %}
+    </table>
+{% endblock body %}

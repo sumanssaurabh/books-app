@@ -1,0 +1,20 @@
+{% extends 'books/base.html' %}
+{% block title %}READ
+{% endblock title %}
+{% block body %}
+<a href="{% url 'books:crud' %}">CRUD</a>
+<a href="{% url 'books:create' %}">Create</a>
+<a href="{% url 'books:read' %}">Read</a>
+<a href="{% url 'books:update' %}">Update</a>
+<a href="{% url 'books:delete' %}">Delete</a>
+<h1>Books</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <table>
+        {{form.as_table}}
+    </table>
+    {{sucess}}
+    <br>
+    <button type="submit">Submit</button>
+</form>
+{% endblock body %}
